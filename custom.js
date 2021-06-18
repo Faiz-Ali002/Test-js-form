@@ -4,21 +4,38 @@ $(document).ready(function () {
 });
 
 function show() {
+  document.getElementById("fname").value = "";
+  document.getElementById("lname").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("pwd").value = "";
   var element2 = document.getElementById("tabledata");
   element2.classList.remove("col-md-12");
 
   var element = document.getElementById("tabledata");
-  element.classList.add("col-md-5");
+  element.classList.add("col-md-7");
 
   var element2 = document.getElementById("formtable");
   element2.classList.remove("delt");
 
   var element1 = document.getElementById("formtable");
-  element1.classList.add("col-md-7");
+  element1.classList.add("col-md-5");
 
   element1.classList.add("show");
 }
+function cancel() {
+  // var element2 = document.getElementById("tabledata");
+  // element2.classList.remove("col-md-7");
 
+  var element = document.getElementById("tabledata");
+  element.classList.add("col-md-12");
+
+  var element1 = document.getElementById("formtable");
+  element1.classList.remove("col-md-5");
+
+  element1.classList.remove("show");
+  var element2 = document.getElementById("formtable");
+  element2.classList.add("delt");
+}
 // function back() {
 //   var element5 = document.getElementById("showdata");
 //   element5.classList.remove("show");
@@ -68,6 +85,7 @@ function inputData() {
 
 function showtable() {
   let iterative_html = "";
+  var output = document.getElementById("output");
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
     //   console.log(key);
@@ -82,15 +100,13 @@ function showtable() {
     let email = res[1];
     let pass = res[2];
 
-    var output = document.getElementById("output");
-
     iterative_html += `
     <tr>
       <td>${name}</td>
       <td>${email}</td>
       <td>${pass}</td>
       <td><button type="button"id="del" class="btn btn-outline-danger"  onClick="del('${key}')">Delete</button>
-        <button type="button"id="del" class="btn btn-outline-success"  onClick="edit('${key}')">Edit</button>
+        <button type="button"id="del" class="btn btn-outline-success"  onClick="edit('${key}', '${name}','${email}','${pass}')">Edit</button>
         </td>
     </tr>`;
 
@@ -115,4 +131,19 @@ function del(key) {
   showtable();
 }
 
-function edit(key) {}
+function edit(key, name, email, pass) {
+  show();
+  // let key1 = key;
+  // document.getElementById("fname").style.display = "none";
+  console.log(key);
+  console.log(name);
+  console.log(email);
+  console.log(pass);
+
+  document.getElementById("fname").value = key;
+  document.getElementById("lname").value = name;
+  document.getElementById("email").value = email;
+  document.getElementById("pwd").value = pass;
+
+  // inputData();
+}
